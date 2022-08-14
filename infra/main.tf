@@ -103,6 +103,8 @@ resource "aws_cloudfront_function" "spa_redirect" {
 
 resource "aws_cloudfront_distribution" "this" {
   enabled = true
+  comment = local.domain_name
+  aliases = [local.domain_name]
 
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
@@ -140,8 +142,9 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = data.aws_acm_certificate.this.arn
-    ssl_support_method  = "sni-only"
+    acm_certificate_arn      = data.aws_acm_certificate.this.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
