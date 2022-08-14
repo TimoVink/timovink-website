@@ -125,7 +125,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   origin {
-    origin_id   = "S3"
+    origin_id   = "default"
     domain_name = aws_s3_bucket.static_assets.bucket_regional_domain_name
 
     s3_origin_config {
