@@ -1,0 +1,96 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  npm-build:
+    name: NPM Build
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Create optimized build
+        run: npm run build
+
+      - name: Archive build artificats
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-build
+          path: ./web/build/
+          if-no-files-found: error
+
+
+  deploy-infra:
+    name: Deploy Infrastructure
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./infra
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: terraform fmt
+        id: fmt
+        run: terraform fmt -check -recursive
+
+      - name: terraform init
+        id: init
+        run: terraform init -input=false -no-color
+
+      - name: terraform validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: terraform apply
+        run: terraform apply -auto-approve -input=false -no-color
+
+
+  deploy-web:
+    name: Deploy Static Assets
+    needs: [npm-build, deploy-infra]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Upload Static Assets
+        run: aws s3 sync . s3://tv-personalsite/
