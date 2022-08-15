@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { articles } from 'data/articles';
-
 
 const Article = ({ title, date, slug }) => (
     <Link to={slug}>
@@ -12,7 +10,7 @@ const Article = ({ title, date, slug }) => (
     </Link>
 );
 
-const ListArticles = () => (
+const ArticleList = ({ articles }) => (
     <ol>
         {articles.map(a => (
             <Article
@@ -25,4 +23,4 @@ const ListArticles = () => (
 );
 
 
-export default ListArticles;
+export default ArticleList;

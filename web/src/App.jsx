@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 
-import ListArticles from './features/list-articles/ListArticles';
-import ShowArticle from './features/show-article/ShowArticle';
+import ListArticlesPage from './features/articles/ListArticlesPage';
+import ListTagArticlesPage from './features/articles/ListTagArticlesPage';
+import ShowArticlePage from './features/articles/ShowArticlePage';
 
 
 const Layout = () => (
@@ -14,8 +15,11 @@ const App = () => (
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Layout />}>
-                <Route index element={<ListArticles />} />
-                <Route path=":slug" element={<ShowArticle />} />
+                <Route index element={<ListArticlesPage />} />
+                <Route path=":slug" element={<ShowArticlePage />} />
+                <Route path="tags">
+                    <Route path=":tag" element={<ListTagArticlesPage />} />
+                </Route>
             </Route>
         </Routes>
     </BrowserRouter>

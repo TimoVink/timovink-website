@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getArticleBySlug } from 'data/articles';
 
 
-const ShowArticle = () => {
+const ShowArticlePage = () => {
     const { slug } = useParams();
     const article = getArticleBySlug(slug);
 
@@ -19,4 +19,4 @@ const ShowArticle = () => {
 };
 
 
-export default ShowArticle;
+export default ShowArticlePage;

@@ -19,8 +19,16 @@ export const articles = [
 ]
 
 const slugLookup = {};
+const tagLookup = {};
 for (const article of articles) {
     slugLookup[article.slug] = article;
+    for (const tag of article.tags) {
+        if (!(tag in tagLookup)) {
+            tagLookup[tag] = []
+        }
+        tagLookup[tag].push(article);
+    }
 }
 
 export const getArticleBySlug = (slug) => slugLookup[slug];
+export const getArticlesByTag = (tag) => tagLookup[tag];
