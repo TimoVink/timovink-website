@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { getArticleBySlug } from 'data/articles';
@@ -12,7 +13,9 @@ const Article = ({ article }) => (
                 <RelativeDate date={article.date} />
             </span>
         </h1>
-        <article.src />
+        <React.Suspense>
+            <article.src />
+        </React.Suspense>
     </article>
 )
 
