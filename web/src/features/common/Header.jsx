@@ -20,10 +20,10 @@ const SocialIcons = () => (
 )
 
 const Avatar = () => {
-    const imageUrl = gravatar.url('timovink@gmail.com', { s: 80 });
+    const imageUrl = gravatar.url('timovink@gmail.com', { s: 160 });
     return (
         <Link to="/">
-            <img src={imageUrl} alt="Timo Vink" className="rounded-full" />
+            <img src={imageUrl} alt="Timo Vink" className="rounded-full w-20" />
         </Link>
     );
 }
