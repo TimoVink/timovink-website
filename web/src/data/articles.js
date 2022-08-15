@@ -17,3 +17,10 @@ export const articles = [
         tags: ['website', 'test']
     }
 ]
+
+const slugLookup = {};
+for (const article of articles) {
+    slugLookup[article.slug] = article;
+}
+
+export const getArticleBySlug = (slug) => slugLookup[slug];
