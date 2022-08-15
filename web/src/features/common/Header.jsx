@@ -23,7 +23,7 @@ const Avatar = () => {
     const imageUrl = gravatar.url('timovink@gmail.com', { s: 80 });
     return (
         <Link to="/">
-            <img src={imageUrl} className="rounded-full" />
+            <img src={imageUrl} alt="Timo Vink" className="rounded-full" />
         </Link>
     );
 }

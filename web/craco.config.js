@@ -7,6 +7,11 @@ module.exports = {
         test: /\.mdx?$/,
         loader: require.resolve('@mdx-js/loader')
       })
+
+      webpackConfig.experiments = {
+        topLevelAwait: true
+      }
+
       return webpackConfig
     }
   }

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "build-articles": "node scripts/build-articles.js",
+    "start": "npm run build-articles && craco start",
+    "build": "npm run build-articles && craco build"
   },
   "dependencies": {
     "@craco/craco": "^6.4.5",
