@@ -1,4 +1,4 @@
-const {addAfterLoader, loaderByName} = require('@craco/craco')
+const { addAfterLoader, loaderByName } = require('@craco/craco')
 
 module.exports = {
   webpack: {
