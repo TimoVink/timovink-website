@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import Header from 'features/common/Header';
 
@@ -22,6 +23,10 @@ const Layout = () => (
 
 const App = () => (
     <BrowserRouter>
+        <Helmet
+            defaultTitle="Timo Vink"
+            titleTemplate="%s | Timo Vink"
+        />
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<ListArticlesPage />} />

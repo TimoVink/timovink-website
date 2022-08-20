@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import { getArticleBySlug } from 'data/articles';
 import RelativeDate from 'features/common/RelativeDate';
@@ -26,10 +27,15 @@ const ShowArticlePage = () => {
     const article = getArticleBySlug(slug);
 
     return (
-        <div className="space-y-8">
-            <Link to="/" className="text-sky-500">← Back to All Articles</Link>
-            <Article article={article} />
-        </div>
+        <>
+            <Helmet>
+                <title>{article.title}</title>
+            </Helmet>
+            <div className="space-y-8">
+                <Link to="/" className="text-sky-500">← Back to All Articles</Link>
+                <Article article={article} />
+            </div>
+        </>
     );
 };
 
