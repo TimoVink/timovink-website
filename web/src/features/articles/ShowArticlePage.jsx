@@ -6,18 +6,20 @@ import RelativeDate from 'features/common/RelativeDate';
 
 
 const Article = ({ article }) => (
-    <article className="space-y-4">
-        <h1 className="flex justify-between items-baseline">
-            <span className="text-4xl">{article.title}</span>
+    <article className="prose">
+        <header className="flex justify-between items-baseline">
+            <h1>{article.title}</h1>
             <span className="text-slate-300">
                 <RelativeDate date={article.date} />
             </span>
-        </h1>
-        <React.Suspense>
-            <article.src />
-        </React.Suspense>
+        </header>
+        <main>
+            <React.Suspense>
+                <article.src />
+            </React.Suspense>
+        </main>
     </article>
-)
+);
 
 const ShowArticlePage = () => {
     const { slug } = useParams();
