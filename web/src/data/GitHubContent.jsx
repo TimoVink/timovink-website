@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useApiCall } from 'queryClient';
 
+import SyntaxHighlightedCode from './SyntaxHighlightedCode';
+
 
 const GitHubContent = ({ repo, commit, branch, file, language, lines }) => {
     const url = `https://raw.githubusercontent.com/${repo}/${commit}/${file}`;
@@ -24,9 +26,9 @@ const GitHubContent = ({ repo, commit, branch, file, language, lines }) => {
 
     return (
         <pre>
-            <code className={langClass}>
+            <SyntaxHighlightedCode className={langClass}>
                 {code}
-            </code>
+            </SyntaxHighlightedCode>
         </pre>
     );
 };

@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 
 import { getArticleBySlug } from 'data/articles';
 import RelativeDate from 'features/common/RelativeDate';
+import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';
 
 
 const Article = ({ article }) => (
@@ -16,7 +17,7 @@ const Article = ({ article }) => (
         </header>
         <main>
             <React.Suspense>
-                <article.src />
+                <article.src components={{ code: SyntaxHighlightedCode }} />
             </React.Suspense>
         </main>
     </article>
