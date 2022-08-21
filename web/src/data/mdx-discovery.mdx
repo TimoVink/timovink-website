@@ -1,0 +1,80 @@
+{/*
+title: Dynamic MDX Discovery
+date: 2022-08-21T01:30:24Z
+tags: website
+*/}
+
+import GitHubContent from './GitHubContent';
+
+
+After our exploration of `MDX` in a [previous post](/interactive-blogs-with-mdx), we have everything we need to `import ./my-file.mdx` and render it in our `React` application.
+
+One thing worth noting here is that the path to the `.mdx` file here is hard-coded. So what would happen if we wanted to `import` a large number of `.mdx` files?
+
+While we _could_ simply hardcode _all_ of the filenames, you can imagine this will get unwieldy fast. As an example, an earlier version of this blog had an `articles.js` which looked like this:
+
+<GitHubContent
+    commit="bbe489011fb9cf278f162686db94d15cfd34217a"
+    file="web/src/data/articles.js"
+    lines="3-22"
+/>
+
+You can imagine this will not be a very nice experience once we have dozens or hundreds of `.mdx` articles.
+
+_Ideally_ we would do something like `fs.readdir(...)` to dynamically find all these `.mdx` files, but since we are running in the browser we won't have access to Node's `fs` module (in addition to needing the `MDX -> JS` transpilation to happen at build-time).
+
+
+## Preprocessing
+
+One possible solution is to discover all the `.mdx` files as a preprocessing step right before running or building the application. That is, we can change our `package.json` scripts to something like this:
+
+<GitHubContent
+    commit="c71d47e51035c1626919fc8820966afb8855afea"
+    file="web/package.json"
+    lines="5-9"
+/>
+
+As you'd expect, this results in `build-articles.js` being invoked with `node` any time we build or run the application.
+
+In this script we are free to use `fs.readdir(...)` and similar modules, so we can use it to automatically generate a `articles.json` file that looks something like:
+
+```jsonc
+// articles.json
+[
+    { "path": "src/data/hello-world.mdx" },
+    { "path": "src/data/second-post.mdx" },
+    ...
+]
+```
+
+Now that we know the paths to our articles, we can use `React's` [code-splitting](https://reactjs.org/docs/code-splitting.html) support to dynamically load articles. A contrived example of this might look like this:
+
+```jsx
+import articles from './articles.json'
+
+const Item = ({ path }) => (
+    <React.Suspense fallback={<div>Loading...</div>}>
+        {React.lazy(() => import(path))}
+    </React.Suspense>
+)
+
+const List = () => (
+    <ol>
+        {articles.map(a => <li><Item path={a.path} /></li>)}
+    </ol>
+)
+```
+
+
+## Post Metadata
+
+The only difference between the `articles.json` file we automatically generated when compared to the handcrafted `articles.js` file, is that we are now missing all the other metadata: The post's title, slug, posted-at date, etc.
+
+Because I'm keen to keep all data related to a post in a single file, I decided to encode this information in an MDX comment at the top of every blog post in a simple `key: value` format. The same `build-articles.js` script from before parses this and adds it to `articles.json`. This metadata looks something like this:
+
+<GitHubContent
+    commit="ac2de912c9892c94b6399e0d3612a2ec5b5c5855"
+    file="web/src/data/hello-world.mdx"
+    language={false}
+    lines="1-5"
+/>
