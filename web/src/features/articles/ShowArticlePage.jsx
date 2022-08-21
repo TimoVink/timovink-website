@@ -7,7 +7,7 @@ import RelativeDate from 'features/common/RelativeDate';
 
 
 const Article = ({ article }) => (
-    <article className="prose">
+    <article className="prose max-w-none">
         <header className="flex justify-between items-baseline">
             <h1>{article.title}</h1>
             <span className="text-slate-300">
