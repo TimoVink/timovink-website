@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
 import Helmet from 'react-helmet';
 
+import { queryClient } from './queryClient';
 import Header from 'features/common/Header';
 
 import ListArticlesPage from 'features/articles/ListArticlesPage';
@@ -22,7 +24,7 @@ const Layout = () => (
 );
 
 const App = () => (
-    <BrowserRouter>
+    <>
         <Helmet
             defaultTitle="Timo Vink"
             titleTemplate="%s | Timo Vink"
@@ -36,8 +38,16 @@ const App = () => (
                 </Route>
             </Route>
         </Routes>
-    </BrowserRouter>
+    </>
+)
+
+const Root = () => (
+    <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </QueryClientProvider>
 )
 
 
-export default App;
+export default Root;
