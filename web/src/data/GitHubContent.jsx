@@ -12,8 +12,11 @@ const GitHubContent = ({ repo, commit, branch, file, language, lines }) => {
         return <pre>Loading...</pre>;
     }
 
-    const lang = language || file.split('.').at(-1);
-    const langClass = `language-${lang}`;
+    let langClass = null;
+    if (language !== false) {
+        const lang = language || file.split('.').at(-1);
+        langClass = `language-${lang}`;
+    }
 
     let code = data;
     if (lines && code) {
