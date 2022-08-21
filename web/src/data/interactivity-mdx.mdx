@@ -1,0 +1,70 @@
+{/*
+title: Interactive Blogs with MDX
+date: 2022-08-21T00:20:41Z
+tags: website
+*/}
+
+import GitHubContent from './GitHubContent';
+
+In my [previous post](/hello-world) I outlined some of the requirements for this blog. In particular, I'd like to be able to embed interactive components in my blog posts while keeping the authoring process simple. To accomplish this I've been exploring [MDX](https://mdxjs.com/).
+
+
+## MDX Overview
+
+`MDX` is a language extension and accompanying set of libraries that allow you to add [JSX](https://reactjs.org/docs/introducing-jsx.html) to your Markdown documents.
+
+Using this allows me to continue to write the bulk of the content in Markdown, but still include dynamic and interactive snippets easily.
+
+As a simple example, if we put the following content in an `.mdx` file:
+
+```jsx
+export const Example = ({ children }) => <>
+    <div>{children}</div>
+    <div>Random: {Math.random()}</div>
+</>;
+
+<Example>This is a _live_ `demo`</Example>
+```
+
+It will render as follows:
+
+export const Example = ({ children }) => <>
+    <div>{children}</div>
+    <div>Random: {Math.random()}</div>
+</>;
+
+<div className="radius-md border px-3 py-2 rounded-md bg-slate-100">
+    <Example>This is a _live_ `demo`</Example>
+</div>
+
+
+### Configuration
+
+`MDX` has great support for a [wide variety](https://mdxjs.com/docs/getting-started/#bundler) of bundlers and frameworks. This blog is using [Create React App](https://github.com/facebook/create-react-app) which uses `webpack` under the hood, so I'm using the [@mdx-js/loader](https://mdxjs.com/packages/loader/) package.
+
+To get up and running all we need to do is make a small change to the `webpack` config to tell it to use the MDX loader when it encounters an `.mdx` file. The `@mdx-js/mdx` library will then do all the hard work of transpiling your document into JavaScript.
+
+Since Create React App hides the `webpack` config from the user by default, we need to use a library like [react-app-rewired](https://github.com/timarney/react-app-rewired) or [craco](https://github.com/dilanx/craco) to allow us to make some tweaks. For this blog my `craco` config looks as follows:
+
+<GitHubContent
+    commit="6a9b14928bf19b2b7266ae4b8fad828afbc849eb"
+    file="web/craco.config.js"
+/>
+
+
+### Usage
+
+Now that the loader is all set up, we are simply able to `import`  MDX files and use them as if they were `React` components.
+
+```jsx
+// Magic!
+import MyBlogPost from './hello-world.mdx'
+
+const MyApp = () => (
+    <div>
+        // ...
+        <MyBlogPost />
+        // ...
+    </div>
+);
+````
