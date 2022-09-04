@@ -6,6 +6,14 @@ import { getArticleBySlug } from 'data/articles';
 import RelativeDate from 'features/common/RelativeDate';
 import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';
 
+import Giscus from '@giscus/react';
+
+
+const HorizontalRule = () => (
+    <div className="flex justify-center my-8">
+        <div className="border-t border-slate-200 w-3/4" />
+    </div>
+);
 
 const Article = ({ article }) => (
     <article className="prose max-w-none">
@@ -20,6 +28,16 @@ const Article = ({ article }) => (
                 <article.src components={{ code: SyntaxHighlightedCode }} />
             </React.Suspense>
         </main>
+        <HorizontalRule />
+        <footer>
+            <Giscus
+                repo="TimoVink/tv-personalsite"
+                repoId="R_kgDOHcyClQ"
+                category="Comments"
+                categoryId="DIC_kwDOHcyClc4CROs2"
+                mapping="title"
+            />
+        </footer>
     </article>
 );
 
