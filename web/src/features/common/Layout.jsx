@@ -20,7 +20,7 @@ const SocialIcons = () => (
 
 const Cover = () => (
     <>
-        <div className="relative w-full text-center">
+        <div className="relative w-full text-center overflow-x-hidden">
             <div className="-mx-16">
                 <span className="text-6xl sm:text-[8rem] whitespace-nowrap font-semibold tracking-wider text-white opacity-[0.07]">
                     {"<blog />"}
