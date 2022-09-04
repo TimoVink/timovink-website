@@ -4,14 +4,14 @@ date: 2022-08-21T01:30:24Z
 tags: website
 */}
 
-import GitHubContent from './GitHubContent';
+import GitHubContent from '../GitHubContent';
 
 
 After our exploration of `MDX` in a [previous post](/interactive-blogs-with-mdx), we have everything we need to `import ./my-file.mdx` and render it in our `React` application.
 
-One thing worth noting here is that the path to the `.mdx` file here is hard-coded. So what would happen if we wanted to `import` a large number of `.mdx` files?
+Note here that the path to the `.mdx` file is hard-coded. So if we wanted to `import` a large number of `.mdx` files, we would have to hardcode the paths to each one individually. This will get unwieldy very fast.
 
-While we _could_ simply hardcode _all_ of the filenames, you can imagine this will get unwieldy fast. As an example, an earlier version of this blog had an `articles.js` which looked like this:
+To illustrate, an earlier version of this blog had an `articles.js` file to track all blog posts which looked like this:
 
 <GitHubContent
     commit="bbe489011fb9cf278f162686db94d15cfd34217a"
@@ -21,7 +21,7 @@ While we _could_ simply hardcode _all_ of the filenames, you can imagine this wi
 
 You can imagine this will not be a very nice experience once we have dozens or hundreds of `.mdx` articles.
 
-_Ideally_ we would do something like `fs.readdir(...)` to dynamically find all these `.mdx` files, but since we are running in the browser we won't have access to Node's `fs` module (in addition to needing the `MDX -> JS` transpilation to happen at build-time).
+_Ideally_ we want an experience similar to `fs.readdir(...)` to dynamically find all these `.mdx` files. Unfortunately by the time our code is running in the browser we won't have access to Node's `fs` module.
 
 
 ## Preprocessing
@@ -70,7 +70,7 @@ const List = () => (
 
 The only difference between the `articles.json` file we automatically generated when compared to the handcrafted `articles.js` file, is that we are now missing all the other metadata: The post's title, slug, posted-at date, etc.
 
-Because I'm keen to keep all data related to a post in a single file, I decided to encode this information in an MDX comment at the top of every blog post in a simple `key: value` format. The same `build-articles.js` script from before parses this and adds it to `articles.json`. This metadata looks something like this:
+I'm keen to keep all data related to a blog post in a single file. That way writing a new blog post is as easy as adding a new `.mdx` file. To accomplish this I decided to encode all the metadata in an MDX comment at the top of every blog post in a simple `key: value` format. The same `build-articles.js` script from before parses this and adds it to `articles.json`. This metadata looks something like this:
 
 <GitHubContent
     commit="ac2de912c9892c94b6399e0d3612a2ec5b5c5855"
@@ -78,3 +78,5 @@ Because I'm keen to keep all data related to a post in a single file, I decided 
     language={false}
     lines="1-5"
 />
+
+In the same script that finds all the articles, I can parse this header and produce an `articles.json` containing all the information needed to render the articles.

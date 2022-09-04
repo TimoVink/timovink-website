@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const srcDir = path.normalize(path.join(__dirname, '..', 'src'));
-const articlesPath = 'data';
+const articlesPath = 'data/articles';
 
 const outputFile = 'articles.json'
 const outputPath = path.join(articlesPath, outputFile);

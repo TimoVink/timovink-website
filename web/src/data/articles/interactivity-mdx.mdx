@@ -4,16 +4,14 @@ date: 2022-08-21T00:20:41Z
 tags: website
 */}
 
-import GitHubContent from './GitHubContent';
+import GitHubContent from '../GitHubContent';
 
 In my [previous post](/hello-world) I outlined some of the requirements for this blog. In particular, I'd like to be able to embed interactive components in my blog posts while keeping the authoring process simple. To accomplish this I've been exploring [MDX](https://mdxjs.com/).
 
 
 ## MDX Overview
 
-`MDX` is a language extension and accompanying set of libraries that allow you to add [JSX](https://reactjs.org/docs/introducing-jsx.html) to your Markdown documents.
-
-Using this allows me to continue to write the bulk of the content in Markdown, but still include dynamic and interactive snippets easily.
+`MDX` is a language extension that allows you to add [JSX](https://reactjs.org/docs/introducing-jsx.html) to your Markdown documents. This is ideal for blogs such as this one, where the majority of the content will be prose, but including `React` snippets adds value.
 
 As a simple example, if we put the following content in an `.mdx` file:
 
@@ -23,7 +21,10 @@ export const Example = ({ children }) => <>
     <div>Random: {Math.random()}</div>
 </>;
 
-<Example>This is a _live_ `demo`</Example>
+<Example>
+    This is:
+     * A _live_ demo
+</Example>
 ```
 
 It will render as follows:
@@ -33,9 +34,14 @@ export const Example = ({ children }) => <>
     <div>Random: {Math.random()}</div>
 </>;
 
-<div className="radius-md border px-3 py-2 rounded-md bg-slate-100">
-    <Example>This is a _live_ `demo`</Example>
+<div className="radius-md border px-3 py-2 rounded-md bg-slate-100 prose-p:m-0 prose-ul:m-0">
+    <Example>
+        This is:
+         * A _live_ `demo`
+    </Example>
 </div>
+
+Note how we can seamlessly combine the Markdown syntax for lists, emphasis, and code, with a custom `React`` component.
 
 
 ### Configuration

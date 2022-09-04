@@ -1,7 +1,7 @@
 import React from 'react';
 import { parseISO } from 'date-fns';
 
-import metadata from './articles.json';
+import metadata from './articles/articles.json';
 
 
 export const articles = [];
