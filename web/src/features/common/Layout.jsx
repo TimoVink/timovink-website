@@ -20,16 +20,23 @@ const SocialIcons = () => (
 
 const Header = () => (
     <div className="flex justify-between text-2xl">
-        <div className="font-semibold">Timo Vink</div>
+        <div className="font-semibold"></div>
         <SocialIcons />
     </div>
 )
 
 const Cover = () => (
     <>
-        <div className="m-16">
-            <div className="text-4xl font-semibold tracking-wider">
-                Hello, my name is <span>Timo</span>
+        <div className="relative w-full text-center">
+            <div className="">
+                <span className="text-[8rem] font-semibold tracking-wider text-white opacity-[0.07]">
+                    {"<blog />"}
+                </span>
+            </div>
+            <div className="absolute z-10 inset-0 flex justify-center items-center">
+                <div className="mt-5 text-4xl font-semibold tracking-widest">
+                    Timo Vink
+                </div>
             </div>
         </div>
         <div className="h-24" />
@@ -45,7 +52,7 @@ const Content = () => (
 const Layout = () => (
     <div className="flex flex-col items-center min-h-screen bg-neutral-100">
         <div className="w-full flex flex-col items-center bg-orange-500 text-white">
-            <div className="w-full max-w-4xl px-4 py-8">
+            <div className="w-full max-w-4xl px-4 pt-8">
                 <Header />
             </div>
             <Cover />
