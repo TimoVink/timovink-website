@@ -19,10 +19,10 @@ const SocialIcons = () => (
 );
 
 const Cover = () => (
-    <>
+    <div className="w-full mb-8 sm:mb-12">
         <div className="relative w-full text-center overflow-x-hidden">
             <div className="-mx-16">
-                <span className="text-6xl sm:text-[8rem] whitespace-nowrap font-semibold tracking-wider text-white opacity-[0.07]">
+                <span className="text-6xl sm:text-[8rem] whitespace-nowrap font-semibold tracking-wider text-white opacity-[0.07] leading-[normal]">
                     {"<blog />"}
                 </span>
             </div>
@@ -32,8 +32,8 @@ const Cover = () => (
                 </div>
             </div>
         </div>
-        <div className="h-24" />
-    </>
+        <div className="h-16" />
+    </div>
 );
 
 const Header = () => (
