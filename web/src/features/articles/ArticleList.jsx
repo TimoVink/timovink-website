@@ -13,15 +13,17 @@ const Tag = ({ tag }) => (
 
 const Article = ({ title, tags, date, slug }) => (
     <li className=''>
-        <Link to={slug} className="flex justify-between items-baseline">
-            <div className="space-y-1">
-                <div className="text-xl font-medium">{title}</div>
-                <div className="text-[0.6rem] space-x-1">
-                    {tags.map(t => <Tag key={t} tag={t} />)}
+        <Link to={slug} className="space-y-1">
+            <div className="sm:flex justify-between items-baseline">
+                <div className="space-y-1">
+                    <div className="text-xl font-medium">{title}</div>
+                </div>
+                <div className="text-slate-300">
+                    <RelativeDate date={date} />
                 </div>
             </div>
-            <div className="text-slate-300">
-                <RelativeDate date={date} />
+            <div className="text-[0.6rem] space-x-1">
+                {tags.map(t => <Tag key={t} tag={t} />)}
             </div>
         </Link>
     </li>

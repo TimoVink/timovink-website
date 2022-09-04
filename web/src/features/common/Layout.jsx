@@ -8,59 +8,57 @@ const SocialIcon = ({ icon, url }) => (
     <a href={url}>
         <FontAwesomeIcon icon={icon} />
     </a>
-)
+);
 
 const SocialIcons = () => (
-    <div className="space-x-2">
+    <span className="space-x-2">
         <SocialIcon icon={faGithubSquare} url="https://github.com/TimoVink" />
         <SocialIcon icon={faLinkedin} url="https://www.linkedin.com/in/timo-vink-380a1426/" />
         <SocialIcon icon={faEnvelopeSquare} url="mailto:timovink@gmail.com" />
-    </div>
-)
-
-const Header = () => (
-    <div className="flex justify-between text-2xl">
-        <div className="font-semibold"></div>
-        <SocialIcons />
-    </div>
-)
+    </span>
+);
 
 const Cover = () => (
     <>
         <div className="relative w-full text-center">
-            <div className="">
-                <span className="text-[8rem] font-semibold tracking-wider text-white opacity-[0.07]">
+            <div className="-mx-16">
+                <span className="text-6xl sm:text-[8rem] whitespace-nowrap font-semibold tracking-wider text-white opacity-[0.07]">
                     {"<blog />"}
                 </span>
             </div>
             <div className="absolute z-10 inset-0 flex justify-center items-center">
-                <div className="mt-5 text-4xl font-semibold tracking-widest">
+                <div className="mt-2 sm:mt-5 text-3xl sm:text-4xl font-semibold tracking-widest">
                     Timo Vink
                 </div>
             </div>
         </div>
         <div className="h-24" />
     </>
-)
+);
+
+const Header = () => (
+    <header className="w-full flex flex-col items-center bg-orange-500 text-white">
+        <div className="w-full max-w-4xl px-8 pt-8">
+            <div className="hidden sm:flex justify-end text-2xl">
+                <SocialIcons />
+            </div>
+        </div>
+        <Cover />
+    </header>
+);
 
 const Content = () => (
-    <div className="-mt-16 p-16 space-y-12 bg-white text-slate-600 shadow-[0_30px_50px_0_rgba(0,0,0,0.15)]">
-        <Outlet />
+    <div className="w-full max-w-4xl px-4 sm:px-16 pb-4 sm:pb-16">
+        <div className="-mt-16 p-6 sm:p-8 md:p-16 space-y-12 bg-white text-slate-600 shadow-[0_30px_50px_0_rgba(0,0,0,0.15)]">
+            <Outlet />
+        </div>
     </div>
-)
+);
 
 const Layout = () => (
     <div className="flex flex-col items-center min-h-screen bg-neutral-100">
-        <div className="w-full flex flex-col items-center bg-orange-500 text-white">
-            <div className="w-full max-w-4xl px-4 pt-8">
-                <Header />
-            </div>
-            <Cover />
-        </div>
-
-        <div className="w-full max-w-4xl px-16 pb-16">
-            <Content />
-        </div>
+        <Header />
+        <Content />
     </div>
 );
 
