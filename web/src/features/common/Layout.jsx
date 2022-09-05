@@ -49,7 +49,7 @@ const Header = () => (
 
 const Content = () => (
     <div className="w-full max-w-4xl px-4 sm:px-16 pb-4 sm:pb-16">
-        <div className="-mt-16 p-6 sm:p-8 md:p-16 space-y-12 bg-white text-slate-600 shadow-[0_30px_50px_0_rgba(0,0,0,0.15)]">
+        <div className="-mt-16 p-6 sm:p-8 md:p-16 bg-white text-slate-600 shadow-[0_30px_50px_0_rgba(0,0,0,0.15)]">
             <Outlet />
         </div>
     </div>

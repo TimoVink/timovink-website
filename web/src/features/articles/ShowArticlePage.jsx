@@ -1,19 +1,14 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Helmet from 'react-helmet';
+import Giscus from '@giscus/react'
+
+import HorizontalRule from 'features/common/HorizontalRule';
 
 import { getArticleBySlug } from 'data/articles';
 import RelativeDate from 'features/common/RelativeDate';
-import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';
+import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';;
 
-import Giscus from '@giscus/react';
-
-
-const HorizontalRule = () => (
-    <div className="flex justify-center my-8">
-        <div className="border-t border-slate-200 w-3/4" />
-    </div>
-);
 
 const Article = ({ article }) => (
     <article className="prose max-w-none">
