@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithubSquare, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
@@ -27,9 +27,9 @@ const Cover = () => (
                 </span>
             </div>
             <div className="absolute z-10 inset-0 flex justify-center items-center">
-                <div className="mt-2 sm:mt-5 text-3xl sm:text-4xl font-semibold tracking-widest">
+                <Link to="/" className="mt-2 sm:mt-5 text-3xl sm:text-4xl font-semibold tracking-widest select-none">
                     Timo Vink
-                </div>
+                </Link>
             </div>
         </div>
         <div className="h-16" />
