@@ -33,7 +33,7 @@ jobs:
       - name: Create optimized build
         run: npm run build
 
-      - name: Archive build artificats
+      - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: frontend-build
@@ -53,7 +53,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
+      - name: Setup terraform
         uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
@@ -85,12 +85,12 @@ jobs:
         with:
           name: frontend-build
 
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
 
-      - name: Upload Static Assets
+      - name: Upload static assets
         run: aws s3 sync . s3://tv-personalsite/
