@@ -76,5 +76,5 @@ const results = mdxFiles.map(processFile);
 
 // Save as JSON file
 const writePath = path.join(srcDir, outputPath);
-console.log(`Preprocessed ${results.length} blog posts (${outputPath})`);
+console.log(`Preprocessed ${results.length} blog posts (src/${outputPath})`);
 fs.writeFileSync(writePath, JSON.stringify(results, null, 2), { encoding: 'utf-8'});
