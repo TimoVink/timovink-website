@@ -15,10 +15,10 @@ const Article = ({ title, tags, date, slug }) => (
     <li className=''>
         <Link to={slug} className="space-y-1">
             <div className="sm:flex justify-between items-baseline">
-                <div className="space-y-1">
-                    <div className="text-xl font-medium">{title}</div>
+                <div className="text-xl font-medium truncate">
+                    {title}
                 </div>
-                <div className="text-slate-300">
+                <div className="text-slate-300 ">
                     <RelativeDate date={date} />
                 </div>
             </div>

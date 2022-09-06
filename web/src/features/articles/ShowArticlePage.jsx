@@ -12,11 +12,11 @@ import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';;
 
 const Article = ({ article }) => (
     <article className="prose max-w-none">
-        <header className="md:flex flex-row-reverse justify-between items-baseline">
+        <header>
             <div className="text-slate-300">
                 <RelativeDate date={article.date} />
             </div>
-            <h1 className="text-2xl sm:text-4xl">{article.title}</h1>
+            <h1 className="text-2xl sm:text-3xl">{article.title}</h1>
         </header>
         <main>
             <React.Suspense>
