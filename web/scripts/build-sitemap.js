@@ -16,7 +16,7 @@ const getArticlesInfo = () => {
     for (const article of articles) {
         const repoPath = path.join(srcRootDir, article.path);
         const command = `git log -n 1 --follow --pretty=%aI -- ${repoPath}`;
-        const lastModifiedDate = proc.execSync(command, { encoding: 'utf-8' }).trim();
+        let lastModifiedDate = proc.execSync(command, { encoding: 'utf-8' }).trim() || article.date;
         article.lastModified = new Date(lastModifiedDate).toISOString();
     };
 
