@@ -37,14 +37,15 @@ const parseMetadata = (mdxPath, metadataStr) => {
     // Tags are comma separated, so let's turn that into an array
     result['tags'] = result['tags']
         .split(',')
-        .map(t => t.trim().toLowerCase());
+        .map(t => t.trim().toLowerCase())
+        .sort();
 
     // Generate a slug if one doesn't exist yet
     if (!('slug' in result)) {
         result['slug'] = result['title']
             .toLowerCase()
-            .replaceAll(' ', '-')
-            .replaceAll(/[^a-z0-9-]/g, '');
+            .replaceAll(/[^a-z0-9 ]/g, '')
+            .replaceAll(/\s+/g, '-');
     }
 
     return result;
