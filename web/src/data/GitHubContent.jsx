@@ -28,7 +28,7 @@ const GitHubContent = ({ repo, commit, file, language, lines }) => {
         return <pre>Loading...</pre>;
     }
 
-    let langClass = null;
+    let langClass = 'language-text';
     if (language !== false) {
         const lang = language || inferLanguage(file);
         langClass = `language-${lang}`;
