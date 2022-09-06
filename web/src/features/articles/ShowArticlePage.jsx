@@ -11,7 +11,7 @@ import SyntaxHighlightedCode from 'data/SyntaxHighlightedCode';;
 
 
 const Article = ({ article }) => (
-    <article className="prose max-w-none">
+    <article className="prose max-w-none prose-p:text-justify">
         <header>
             <div className="text-slate-300">
                 <RelativeDate date={article.date} />
