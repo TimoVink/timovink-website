@@ -5,7 +5,16 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import SyntaxHighlightedCode from './SyntaxHighlightedCode';
 
+const inferLanguage = (fileName) => {
+    const extension = fileName.split('.').at(-1);
+    switch (extension) {
+        case "js":
+            return "javascript";
 
+        default:
+            return extension;
+    }
+}
 
 
 const GitHubContent = ({ repo, commit, file, language, lines }) => {
@@ -21,7 +30,7 @@ const GitHubContent = ({ repo, commit, file, language, lines }) => {
 
     let langClass = null;
     if (language !== false) {
-        const lang = language || file.split('.').at(-1);
+        const lang = language || inferLanguage(file);
         langClass = `language-${lang}`;
     }
 
