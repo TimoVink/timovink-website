@@ -5,6 +5,10 @@ import { stackoverflowDark } from 'react-syntax-highlighter/dist/esm/styles/hljs
 
 const SyntaxHighlightedCode = ({ className, startingLineNumber, children, ...props }) => {
     const match = /language-(\w+)/.exec(className || '');
+
+    // MDX parsing adds a trailing newline, we don't want to render it
+    children = children.trimEnd('\n');
+
     if (match) {
         return (
             <SyntaxHighlighter
@@ -16,14 +20,14 @@ const SyntaxHighlightedCode = ({ className, startingLineNumber, children, ...pro
                 showLineNumbers
                 {...props}
             >
-                {children.trim()}
+                {children}
             </SyntaxHighlighter>
         );
     }
 
     return (
         <code className={className} {...props}>
-            {children.trim()}
+            {children}
         </code>
     );
 }
