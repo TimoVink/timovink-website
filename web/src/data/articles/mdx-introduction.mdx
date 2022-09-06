@@ -1,0 +1,103 @@
+{/*
+title: Interactive Blog with MDX (Part 1): Introduction & Setup
+date: 2022-08-21T00:20:41Z
+tags: blog, mdx
+*/}
+
+
+import GitHubContent from '../GitHubContent';
+
+
+In my [previous post](/hello-world) I outlined some of the requirements for this blog. In particular, I'd like to be able to embed interactive components in my blog posts while keeping the authoring process as simple as possible. To accomplish this I've been exploring [MDX](https://mdxjs.com/).
+
+
+## MDX Overview
+
+`MDX` is a language extension that allows you to add [JSX](https://reactjs.org/docs/introducing-jsx.html) to your Markdown documents. This is ideal for blogs such as this one, where the majority of the content will be prose, but including `React` snippets can really help bring the content alive.
+
+As a short demonstration of how this works in practice, if we write the following `MDX`:
+
+```mdx
+export const Example = ({ children }) => <>
+    <div>{children}</div>
+    <div>Random: {Math.random()}</div>
+</>;
+
+<Example>
+    This is:
+     * A _live_ demo
+</Example>
+```
+
+It will render as follows:
+
+export const Example = ({ children }) => <>
+    <div>{children}</div>
+    <div>Random: {Math.random()}</div>
+</>;
+
+<div className="radius-md border px-3 py-2 rounded-md bg-slate-100 prose-p:m-0 prose-ul:m-0">
+    <Example>
+        This is:
+         * A _live_ `demo`
+    </Example>
+</div>
+
+So we are able to seamlessly combine Markdown syntax with custom `React` components. Pretty cool!
+
+In this example I declared a new component within my `MDX` file, but in real-world usage I would recommend separating the `React` code into their own `.jsx` files to separate the prose and code where possible.
+
+
+### Configuration
+
+`MDX` has great support for a [wide variety](https://mdxjs.com/docs/getting-started/#bundler) of bundlers and frameworks. This blog is using [Create React App](https://github.com/facebook/create-react-app), which uses `webpack` under the hood, so I'm using [@mdx-js/loader](https://mdxjs.com/packages/loader/): This package will do all the heavy lifting when it comes to transpiling our `.mdx` file into JavaScript.
+
+To get up and running we need to make a small change to the `webpack` config to tell it what to do when it encounters an `.mdx` file. Unfortunately this is not completely straightforward as Create React App hides the `webpack` config from the user by default.
+
+To get access to the config we could [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject), but this is a rather drastic option that negates a lot of the benefits we get from using Create React App in the first place. Instead we will use [CRACO](https://github.com/dilanx/craco), which allows us to customize our configuration without ejecting.
+
+#### CRACO Setup
+
+After installing CRACO with `npm install @craco/craco` we need to update our `package.json` as follows:
+
+```diff
+"scripts": {
+-   "start": "react-scripts start",
++   "start": "craco start",
+-   "build": "react-scripts build",
++   "build": "craco build",
+-   "test": "react-scripts test",
++   "test": "craco test"
+}
+```
+
+By using this wrapper for `react-scripts`, CRACO gets a chance to intercept and modify the `webpack` config every time we run, build, or test our application.
+
+We can now start adding our custom `webpack` configuration to the CRACO config. To set up MDX, our config looks as follows:
+
+<GitHubContent
+    commit="6a9b14928bf19b2b7266ae4b8fad828afbc849eb"
+    file="web/craco.config.js"
+/>
+
+As you can see, we are just telling `webpack` that any time it encounters an `.md` or `.mdx` file it should use the `@mdx-js/loader` package to process it.
+
+
+### Usage
+
+Now that the loader is all set up, we are simply able to `import`  MDX files and use them as if they were `React` components.
+
+```jsx
+// Magic!
+import MyBlogPost from './hello-world.mdx'
+
+const MyApp = () => (
+    <div>
+        // ...
+        <MyBlogPost />
+        // ...
+    </div>
+);
+```
+
+This is a great first step, but to make this scale as a way for managing the blog there's more work to be done: In the next post we'll look into dynamically importing an entire directory of `MDX` files without having to hardcode the paths to individual files.
