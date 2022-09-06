@@ -49,10 +49,10 @@ const GitHubContent = ({ repo, commit, file, language, lines }) => {
     return (
         <div>
             <div className="flex items-center rounded-t-md px-4 py-2 bg-slate-900 space-x-2">
-                <a href={repoUrl} target="_blank" className="text-slate-200">
+                <a href={repoUrl} target="_blank" rel="noreferrer" className="text-slate-200">
                     <FontAwesomeIcon icon={faGithub} />
                 </a>
-                <a href={fileUrl} target="_blank" className="font-mono text-slate-200">
+                <a href={fileUrl} target="_blank" rel="noreferrer" className="font-mono text-slate-200">
                     {lines ? `${file}:${lines}` : file}
                 </a>
             </div>
