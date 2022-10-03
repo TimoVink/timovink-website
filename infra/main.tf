@@ -3,7 +3,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project = "tv-personalsite"
+      Project = "timovink-website"
     }
   }
 }
@@ -14,7 +14,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project = "tv-personalsite"
+      Project = "timovink-website"
     }
   }
 }
@@ -53,7 +53,7 @@ resource "aws_cloudfront_origin_access_identity" "this" {
 }
 
 resource "aws_s3_bucket" "static_assets" {
-  bucket = "tv-personalsite"
+  bucket = "timovink.com"
 }
 
 data "aws_iam_policy_document" "static_assets" {
@@ -84,7 +84,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "static_assets" {
 }
 
 resource "aws_cloudfront_function" "spa_redirect" {
-  name    = "tv-personalsite-sparedirect"
+  name    = "timovink-website-sparedirect"
   runtime = "cloudfront-js-1.0"
   publish = true
   code    = <<-EOF

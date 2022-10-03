@@ -26,7 +26,7 @@ const Article = ({ article }) => (
         <HorizontalRule />
         <footer>
             <Giscus
-                repo="TimoVink/tv-personalsite"
+                repo="TimoVink/timovink-website"
                 repoId="R_kgDOHcyClQ"
                 category="Comments"
                 categoryId="DIC_kwDOHcyClc4CROs2"

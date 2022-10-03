@@ -74,7 +74,7 @@ GitHubContent.propTypes = {
 };
 
 GitHubContent.defaultProps = {
-    repo: 'TimoVink/tv-personalsite',
+    repo: 'TimoVink/timovink-website',
     commit: 'main',
 };
 

@@ -3,14 +3,14 @@ terraform {
     organization = "timovink"
 
     workspaces {
-      name = "tv-personalsite"
+      name = "timovink-website"
     }
   }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4"
+      version = "~> 4.0"
     }
   }
 }

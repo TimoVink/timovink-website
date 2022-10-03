@@ -93,4 +93,4 @@ jobs:
           aws-region: us-west-2
 
       - name: Upload static assets
-        run: aws s3 sync . s3://tv-personalsite/
+        run: aws s3 sync . s3://timovink.com/
