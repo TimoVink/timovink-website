@@ -99,6 +99,10 @@ resource "aws_cloudfront_function" "spa_redirect" {
         return request;
     }
   EOF
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_cloudfront_distribution" "this" {
