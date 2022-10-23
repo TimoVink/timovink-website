@@ -10,7 +10,7 @@
     "build": "npm run preprocess && craco build"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^4.5.11",
+    "@fontsource/open-sans": "^4.5.12",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
