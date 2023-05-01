@@ -35,7 +35,7 @@
     "lodash": "^4.17.21",
     "postcss": "^8.4.17",
     "react-scripts": "5.0.1",
-    "tailwindcss": "^3.2.7"
+    "tailwindcss": "^3.3.2"
   },
   "eslintConfig": {
     "extends": [
