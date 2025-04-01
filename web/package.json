@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.16",
     "autoprefixer": "^10.4.20",
     "lodash": "^4.17.21",
     "postcss": "^8.4.49",
