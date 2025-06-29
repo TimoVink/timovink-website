@@ -14,6 +14,7 @@ Note here that the path to the `.mdx` file is hard-coded. So if we wanted to `im
 To illustrate, an earlier version of this blog had an `articles.js` file to track all blog posts which looked like this:
 
 <GitHubContent
+    repo="TimoVink/timovink-website"
     commit="bbe489011fb9cf278f162686db94d15cfd34217a"
     file="web/src/data/articles.js"
     lines="3-22"
@@ -29,6 +30,7 @@ _Ideally_ we want an experience similar to `fs.readdir(...)` to dynamically find
 One possible solution is to discover all the `.mdx` files as a preprocessing step right before running or building the application. That is, we can change our `package.json` scripts to something like this:
 
 <GitHubContent
+    repo="TimoVink/timovink-website"
     commit="c71d47e51035c1626919fc8820966afb8855afea"
     file="web/package.json"
     lines="5-9"
@@ -73,6 +75,7 @@ The only difference between the `articles.json` file we automatically generated 
 I'm keen to keep all data related to a blog post in a single file. That way writing a new blog post is as easy as adding a new `.mdx` file. To accomplish this I decided to encode all the metadata in an MDX comment at the top of every blog post in a simple `key: value` format. The same `build-articles.js` script from before parses this and adds it to `articles.json`. This metadata looks something like this:
 
 <GitHubContent
+    repo="TimoVink/timovink-website"
     commit="ac2de912c9892c94b6399e0d3612a2ec5b5c5855"
     file="web/src/data/hello-world.mdx"
     language={false}
